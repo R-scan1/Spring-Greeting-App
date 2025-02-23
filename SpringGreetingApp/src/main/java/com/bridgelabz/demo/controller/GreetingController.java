@@ -61,4 +61,13 @@ public class GreetingController {
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
     }
+    
+    @PutMapping("/{id}")
+    public Greeting updateGreeting(@PathVariable Long id, @RequestParam String newMessage) {
+        Greeting updatedGreeting = greetingService.updateGreeting(id, newMessage);
+        if (updatedGreeting == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting with ID " + id + " not found");
+        }
+        return updatedGreeting;
+    }
 }

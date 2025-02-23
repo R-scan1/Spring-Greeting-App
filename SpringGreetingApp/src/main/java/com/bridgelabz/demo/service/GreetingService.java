@@ -44,4 +44,14 @@ public class GreetingService {
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll();
     }
+    
+    public Greeting updateGreeting(Long id, String newMessage) {
+        Greeting greeting = greetingRepository.findById(id).orElse(null);
+        if (greeting != null) {
+            greeting.setMessage(newMessage);
+            return greetingRepository.save(greeting); 
+        } else {
+            return null; 
+        }
+    }
 }
