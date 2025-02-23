@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/greet")
+@RequestMapping("/greeting")
 public class GreetingController {
 
     
@@ -35,5 +35,11 @@ public class GreetingController {
     @DeleteMapping
     public String deleteGreeting() {
         return "DELETE: "+greetingService.getGreetingMessage();
+    }
+    
+    @GetMapping("/params")
+    public String getGreetingParams(@RequestParam(required = false) String firstName,
+                                    @RequestParam(required = false) String lastName) {
+        return greetingService.displayingGreeting(firstName, lastName);
     }
 }
