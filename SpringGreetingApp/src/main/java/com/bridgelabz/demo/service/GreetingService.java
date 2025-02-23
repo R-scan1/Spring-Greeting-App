@@ -54,4 +54,14 @@ public class GreetingService {
             return null; 
         }
     }
+    
+    public boolean deleteGreeting(Long id) {
+        Greeting greeting = greetingRepository.findById(id).orElse(null);
+        if (greeting != null) {
+            greetingRepository.delete(greeting);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
