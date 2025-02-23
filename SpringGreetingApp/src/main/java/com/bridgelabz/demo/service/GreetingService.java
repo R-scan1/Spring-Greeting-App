@@ -1,9 +1,19 @@
 package com.bridgelabz.demo.service;
 
 import org.springframework.stereotype.Service;
+import com.bridgelabz.demo.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.bridgelabz.demo.repository.*;
+import org.springframework.context.annotation.ComponentScan;
+
+
 
 @Service
+@ComponentScan(basePackages = "com.bridgelabz.demo.repository")
 public class GreetingService {
+	
+	@Autowired
+    private GreetingRepository greetingRepository;
 
     public String getGreetingMessage() {
         return "Hello from BridgeLabz";
@@ -19,5 +29,10 @@ public class GreetingService {
         } else {
             return "Hello World";
         }
+    }
+    
+    public Greeting saveGreeting(String message) {
+        Greeting greeting = new Greeting(message);
+        return greetingRepository.save(greeting);
     }
 }
